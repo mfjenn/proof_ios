@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 catternaut. All rights reserved.
 //
 
+#import "ProofDoc.h"
+#import "ProofData.h"
 #import "ProofMasterViewController.h"
-
 #import "ProofDetailViewController.h"
 
 @interface ProofMasterViewController () {
@@ -16,6 +17,7 @@
 @end
 
 @implementation ProofMasterViewController
+@synthesize places = _places;
 
 - (void)awakeFromNib
 {
@@ -30,6 +32,7 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    self.title = @"Proof I Was Here";
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,18 +60,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return _places.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    UITableViewCell *cell = [tableView
+                             dequeueReusableCellWithIdentifier:@"MyBasicCell"];
+    ProofDoc *place = [self.places objectAtIndex:indexPath.row];
+    cell.textLabel.text = place.data.title;
+    cell.imageView.image = place.thumbImage;
     return cell;
 }
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.

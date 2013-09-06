@@ -10,4 +10,6 @@
 
 @interface ProofMasterViewController : UITableViewController
 
+@property (strong) NSMutableArray *places;
+
 @end

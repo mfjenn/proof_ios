@@ -5,13 +5,23 @@
 //  Created by Mary Jenn on 8/8/13.
 //  Copyright (c) 2013 catternaut. All rights reserved.
 //
-
+#import "ProofMasterViewController.h"
+#import "ProofDoc.h"
 #import "ProofAppDelegate.h"
 
 @implementation ProofAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+
 {
+    ProofDoc *place1 = [[ProofDoc alloc] initWithTitle:@"Eiffel Tower" rating:4 thumbImage:[UIImage imageNamed:@"eiffel1_thumb.jpg"] fullImage:[UIImage imageNamed:@"eiffel1.jpg"]];
+    ProofDoc *place2 = [[ProofDoc alloc] initWithTitle:@"Taj Mahal" rating:3 thumbImage:[UIImage imageNamed:@"taj1_thumb.jpg"] fullImage:[UIImage imageNamed:@"taj1.jpg"]];
+    NSMutableArray *places = [NSMutableArray arrayWithObjects: place1, place2, nil];
+    
+    UINavigationController * navController = (UINavigationController *) self.window.rootViewController;
+    ProofMasterViewController * masterController = [navController.viewControllers objectAtIndex:0];
+    masterController.places = places;
+
     // Override point for customization after application launch.
     return YES;
 }
@@ -44,3 +54,5 @@
 }
 
 @end
+
+
